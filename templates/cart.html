@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+{% block main %}Cart{% endblock %}
+{% block content %}
+<!-- breadcum section -->
+<div class="breadcum">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="main_breadcum">
+                    <ul>
+                        <li><a href="/" class="trans" title="Home">Home</a></li>
+                        <li>Cart</li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- breadcum section -->
+<!-- Our cart section -->
+<section>
+    <div class="main_cart">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_Ourmenu">
+                        {% if error %}
+                        <h5>{{error}}</h5>
+                        {% else %}
+                        <h2 class="title">Cart</h2>
+                        {% endif %}
+                    </div>
+                    {% if msg %}
+                    <div class="{{cls}}">{{msg}}</div>
+                    {% endif %}
+                </div>
+                <div class="col-md-12">
+                    <div class="cart_list">
+                        <ul class="inner_cartlist">
+                            <li class="header">
+                                <div class="main_head">
+                                    <div class="edit">&nbsp;</div>
+                                    <div class="pro_name">
+                                        <h4>Product</h4>
+                                    </div>
+                                    <div class="pro_qty">
+                                        <h4>Qty</h4>
+                                    </div>
+                                    <div class="pro_price">
+                                        <h4>Price</h4>
+                                    </div>
+                                    <div class="pro_total">
+                                        <h4>Total</h4>
+                                    </div>
+                                </div>
+                            </li>
+                            {% for i in items %}
+                            <li class="rows">
+                            <form action="editcart/{{i.id}}" method="POST">
+                                {% csrf_token %}
+                                <div class="edit">
+                                    <div class="edit_div">
+                                        <a href="deletecart?id={{i.id}}" class="trans del" title="Delete"><i
+                                                class="fa fa-times" aria-hidden="true"></i></a>
+                                        
+                                    </div>
+                                </div>
+                                <div class="pro_name">
+                                    <div class="products">
+                                        <div class="pro_img"><img src={{ i.product.image.url }} class="absoImg" style="
+                                            width: 200px;
+                                            height: 150px;" alt="">
+                                        </div>
+                                        <div class="pro_descr" style="padding: 27px; margin: 26px;">
+                                            <h3 class="pro_title"><a href="#" title="Product"
+                                                    class="trans">{{i.product.name}}</a></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pro_qty" style="padding: 60px;">
+                                    <div class="number-input">
+                                        <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                            class="plus" formaction="editcart/{{i.id}}"></button>
+                                        <input class="quantity" min="1" name="quantity" value="{{i.quantity}}" type="number">
+                                        <button
+                                            onclick="this.parentNode.querySelector('input[type=number]').stepDown()" formaction="editcart/{{i.id}}"></button>
+                                    </div>
+                                </div>
+                                <div class="pro_price" style="padding: 60px;">
+                                    <h4>&#8377;{{i.product.price}}</h4>
+                                </div>
+                                <div class="pro_total" style="padding: 60px;">
+                                    <h4>&#8377;{{i.total_price}}</h4>
+                                </div>
+                            </form>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="coupan_block">
+                            <form method="post" id="couponform">
+                                <div class="coupan_code">
+                                    <input type="text" name="Coupancode" class="form-control" placeholder="Coupon Code">
+                                    <button type="submit" class="coupon-btn send trans hvr-ripple-out"
+                                        name="coupon">Apply Coupon</button>
+                                    <!-- <input type="submit" value="Apply Coupon" class="send trans"> -->
+                                </div>
+                            </form>
+                            <div class="Redio_diltype">
+                                <ul>
+                                    <li>
+
+                                        <input type="radio" id="Delivery" name="deliver_type" value="male" checked>
+                                        <label for="Delivery">Delivery</label>
+                                    </li>
+                                    <li>
+                                        <input type="radio" id="takeaway" name="deliver_type" value="female">
+                                        <label for="takeaway">Take Away</label>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="checkout">
+                            <p class="order_dscr">Order with Delivery</p>
+                            <p class="order_total"><span>Total :</span>&#8377;{{total}}</p>
+                            <div class="btn_checkout">
+                                <a href="menu" class="trans gray_btn hvr-ripple" title="Update Cart"> Continue Shoping </a>
+                                <a href="payment" class="trans red_btn squre-btn hvr-ripple-out"
+                                    title="Proceed to Checkout">Proceed to Checkout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Our cart section -->
+<!-- Quick Order Section -->
+<section>
+    <div class="quick_order">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_quickorder">
+                        <h3 class="title">Call Us for Quick Order</h3>
+                        <div class="cntct typewriter-effect"><span class="call_desk"><a href="/">9876543210</a></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Quick Order Section -->
+{% endblock %}

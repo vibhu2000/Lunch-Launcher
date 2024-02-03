@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}Add To Menu{% endblock %}
+{% block main %}Add To Menu{% endblock %}
+{% block content %}
+    <form method="POST" enctype="multipart/form-data" action="addmenu">
+    {% csrf_token %}
+      <div class="container fluid py-4" style="color: black; font-size: larger;">
+
+        <div class="col-lg-3" style="float: right; padding-left: 90px;">
+          <!-- <a href="...">Edit Profile Photo</a> -->
+          <input type="file" name="image" id="id_cover" class="inputfile">
+        </div>
+        <div class="form-row py-2">
+          <!-- first name -->
+          <div class="col-md-4 mb-3 col-xs-10" style="margin-right: 60px;">
+            <label for="first_name">Name</label>
+            <input type="text" class="form-control" id="first_name" name="name" required>
+          </div>
+          <!-- last name -->
+          <div class="col-md-4 mb-3 ">
+            <label for="last_name">Price</label>
+            <input type="number" class="form-control" id="last_name" name="price" required>
+          </div>
+        </div>
+        <div class="col-md-10 mb-3 py-2" style="margin-left: -14px;">
+            <label for="Address">Description</label>
+            <textarea type="text" class="form-control" id="Address" style="height: 100px;" name="desc" required></textarea>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="cate">Category</label>
+            <select class="form-control" name="cate" id="cate">
+                <option>Pizza</option>
+                <option>Pasta</option>
+                <option>Burger</option>
+                <option>Sandwich</option>
+                <option>Snacks</option>
+                <option>Beverages</option>
+            </select>
+        </div>
+        <div class="col-md-4 mb-3">
+            <label for="types">Type</label>
+            <select class="form-control" name="types" id="type">
+                <option>Vegetarian</option>
+                <option>Non-Vegetarian</option>
+            </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    </form>
+{% endblock %}

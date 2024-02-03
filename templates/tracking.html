@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}Track{% endblock %}
+{% block main %}Tracking{% endblock %}
+{% block content %}
+
+
+<div class="wrapper">
+    <!-- breadcum section -->
+
+    <div class="breadcum">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_breadcum">
+                        <ul>
+                            <li><a href="index.html" class="trans" title="Home">Home</a></li>
+                            <li>Tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- breadcum section -->
+    <!-- Our login section -->
+    <section id="login">
+        <div class="login_section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main_profile">
+                            <form method="post" action="tracking" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="login_left col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="login_box">
+                                        <div class="login_form">
+
+                                            <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                                <span class="text-muted">Your cart</span>
+                                                <span class="badge badge-secondary badge-pill">{{items|length}}</span>
+                                            </h4>
+                                            <ul class="list-group mb-3">
+                                                <li class="list-group-item d-flex justify-content-between lh-condensed"
+                                                    style="margin-bottom: 1%;">
+                                                    <div>
+                                                        <h6 class="my-0">Product name</h6>
+                                                    </div>
+                                                    <h6>Price</h6>
+                                                </li>
+                                                {% for i in items %}
+                                                <li class="list-group-item d-flex justify-content-between lh-condensed" style="margin-bottom: 1%;">
+                                                    <div>
+                                                        <h6 class="my-0">{{i.product.name}}</h6>
+                                                    </div>
+                                                    <span class="text-muted" id="{{i.id}}">&#8377;{{i.total_price}}</span>
+                                                </li>
+                                                {% endfor %}
+
+                                                <li class="list-group-item d-flex justify-content-between">
+                                                    <span>Total</span>
+                                                    <strong name="tot_amount">&#8377;{{ total }}</strong>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="signup_right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="login_box">
+
+                                        <ul style="padding-left: 90px;">
+                                            <h1 class="text-muted">Status</h1>
+                                            <ul>
+                                                {% for i in track %}
+                                                    {{i.track}}
+                                                {% endfor %}
+                                            </ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    {% endblock %}

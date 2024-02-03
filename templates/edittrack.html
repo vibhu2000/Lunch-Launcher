@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Edit Track{% endblock %}
+{% block main %}Edit Track{% endblock %}
+{% block content %}
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">UserName</th>
+            <th scope="col">Menu</th>
+            <th scope="col">Total</th>
+            <th scope="col">Track</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+        <form action="edittrack?id={{order.id}}" method="post">
+            {% csrf_token %}
+            <td align="center">{{order.user.username}}</td>
+            <td align="center">{{order.menu}}</td>
+            <td align="center">{{order.total_price}}</td>
+            <td align="center">
+                <select class="form-control" name="track" id="track">
+                    <option selected>{{order.track}}</option>
+                    <option>Your Order is Accepted</option>
+                    <option>Your Order start Cooking</option>
+                    <option>Your Order has been Dispatch</option>
+                    <option>Your Order has been Delivered</option>
+                </select>
+            </td>
+            <td align="center">
+                {% if order.status %}
+                    <span class="badge badge-success">Success</span>
+                {% else %}
+                    <span class="badge badge-danger">Pending</span>
+                {% endif %}
+            </td>
+            <td align="center">
+                <button type="submit">Edit</button><br>
+            </td>
+        </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

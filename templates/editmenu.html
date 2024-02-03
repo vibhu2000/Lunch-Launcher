@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Edit To Cart{% endblock %}
+{% block main %}Edit To Cart{% endblock %}
+{% block content %}
+    <table class="table">
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Name</th>
+            <th scope="col">Desc</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Type</th>
+            <th scope="col">Edit/delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for menu in menus %}
+        <tr>
+        <form action="editmenu?id={{menu.id}}" method="post">
+            {% csrf_token %}
+            <td align="center"><img src="{{ menu.image.url }}" alt="" height="60" width="60"></td>
+            <td align="center"><textarea name="name" id="name" cols="30" rows="10">{{menu.name}}</textarea></td>
+            <td align="center"><textarea name="desc" id="desc" cols="30" rows="10">{{ menu.desc }}</textarea></td>
+            <td align="center"><input type="text" name="price" id="price" value={{ menu.price }}></td>
+            <td align="center">{{ menu.cate }}</td>
+            <td align="center">{{ menu.types }}</td>
+            <td align="center">
+                <button type="submit">Edit</button><br>
+                <button type="submit" formaction="deletemenu?id={{menu.id}}">Delete</button>
+            </td>
+        </form>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+{% endblock %}

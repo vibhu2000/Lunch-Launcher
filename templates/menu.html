@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Menu{% endblock %}
+{% block main %}Menu{% endblock %}
+{% block content %}
+        <!-- breadcum section -->
+
+        <div class="breadcum">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main_breadcum">
+                            <ul>
+                                <li><a href="index.html" class="trans" title="Home">Home</a></li>
+                                <li>Our Menu</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- breadcum section -->
+        <!-- Our Menu section -->
+        <!-- Our Menu section -->
+        <section>
+            <div class="Our_menu">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main_Ourmenu">
+                                <div class="btn-group" role="group">
+                                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      Filter
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                                      <a class="dropdown-item" href="menu?category=Pizza">Pizza</a>
+                                      <a class="dropdown-item" href="menu?category=Burger">Burger</a>
+                                      <a class="dropdown-item" href="menu?category=Pasta">Pasta</a>
+                                      <a class="dropdown-item" href="menu?category=Sandwich">Sandwich</a>
+                                      <a class="dropdown-item" href="menu?category=Snacks">Snacks</a>
+                                      <a class="dropdown-item" href="menu?category=Beverages">Beverages</a>
+                                      <a class="dropdown-item" href="menu?types=Vegetarian">Only Veg</a>
+                                    </div>
+                                    <form class="form-inline my-2 my-lg-0" action="menu" method="POST">
+                                        {% csrf_token %}
+                                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                                    </form>
+                                  </div>
+                                <div class="row row-cols-3 row-cols-md-2">
+                                {% for menu in menus %}
+                                <div class="col mb-1">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src={{ menu.image.url }} class="card-img-top" alt="..." width="30" height="200">
+                                            <div class="card-body">
+                                                <h5 class="card-title">{{menu.name}}</h5>
+                                                <p class="card-text">{{menu.desc}}</p>
+                                                <p class="card-text"><small class="text-muted">&#8377;{{menu.price}}</small></p>
+                                                <form action="{% url 'cart' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" value="{{menu.id}}" name="p_id" id="p_id">    
+                                                    <label for="qty">Enter Quantity</label>
+                                                    <input type="number" name="qty" id="qty" value="1">   
+                                                    <button type="submit" class="btn btn-danger">Add Cart</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                </div>
+                                {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Our Menu section -->
+        <!-- Quick Order Section -->
+        <section>
+            <div class="quick_order">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="main_quickorder">
+                                <h3 class="title">Call Us for Quick Order</h3>
+                                <div class="cntct typewriter-effect"><span class="call_desk"><a href="tel:+01234567890">9876543210</a></span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Quick Order Section -->
+        {% endblock %}

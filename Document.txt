@@ -1,0 +1,12 @@
+#paypal
+pip install django-paypal
+https://developer.paypal.com/developer/accounts/
+
+pip install pillow
+pip install django-cleanup
+
+#mysqlclient
+https://www.lfd.uci.edu/~gohlke/pythonlibs/
+pip install [FILE NAME]
+or
+pip install mysqlclient

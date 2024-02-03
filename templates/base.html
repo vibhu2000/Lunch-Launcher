@@ -1,0 +1,203 @@
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
+        <meta name="robots" content="index, follow">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="" name="description" />
+        <meta content="" name="keywords" />
+        <title>Lunch Launcher | {% block title %}{% endblock %}</title>
+        <!-- Fonts Here-->
+        <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i"rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700" rel="stylesheet">
+        <!-- Fonts here-->
+
+        <!-- Style Here -->
+        <link rel="stylesheet" href="static/css/slick.css">
+        <link rel="stylesheet" href="static/css/style1.css">
+        <link rel="stylesheet" href="static/css/my-account.css">
+        <link rel="stylesheet" href="static/css/font-awesome.min.css">
+
+        <!-- bootstrap -->
+        <link rel="stylesheet" href="static/css/bootstrap.min.css">
+
+        <!-- JS -->
+        <script src="static/js/popper.min.js" defer></script>
+        <script src="static/js/jquery.min.js" defer></script>
+        <script src="static/js/bootstrap.min.js" defer></script>
+    </head>
+
+    <body>
+        <div class="wrapper">
+            <!-- Header Start Here -->
+            <header id="Header">
+                <div class="main_header">
+                    <div class="top_nav" id="navbar">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="logo">
+                                        <a href="/" title="Launch Launcher"><img src="static/images/logo1.png"
+                                                alt="Launch Launcher" width="300" height="50"></a>
+                                    </div>
+                                    <div class="nav_manu">
+                                        <div class="Menu_list">
+                                            <ul class="menu">
+                                                {% if user.is_superuser %}
+                                                <li><a href="/" class="trans hvr-underline-from-left">Home</a></li>
+                                                <li class="nav-item dropdown">
+                                                    <a class="trans" href="#" id="navbarDropdown" role="button"
+                                                        data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        Menu
+                                                    </a>
+                                                    <div class="dropdown-menu bg-transparent"
+                                                        aria-labelledby="navbarDropdown">
+                                                        <a class="trans" href="addmenu">Add To Menu</a>
+                                                        <a class="trans" href="editmenu">Edit To Menu</a>
+                                                    </div>
+                                                </li>
+                                                <li><a href="edittrack" class="trans">Tracking</a></li>
+                                                {% else %}
+                                                <li><a href="/" class="trans hvr-underline-from-left">Home</a></li>
+                                                <li><a href="about" class="trans">About</a></li>
+                                                <li><a href="menu" class="trans">Order</a></li>
+                                                {% endif %}
+                                                {% if user.is_authenticated %}
+                                                <li><a href="profile" class="trans">Hi {{ user.username }}</a></li>
+                                                <li><a href="logout" class="trans">logout</a></li>
+                                                {% else %}
+                                                <li><a href="login">Login</a></li>
+                                                <li><a href="register">Register</a></li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                        <div class="Cart">
+                                            <a href="cart" title="Cart">
+                                                <span class="Cart_count">Cart : ({{items|length }})
+                                                    &#8377;{{total}}</span>
+                                                <!-- <i class="fa fa-shopping-cart" aria-hidden="true"></i> -->
+                                                <img class="cart_img" src="static/images/cart_1.png" alt="cart_1">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="H_banner home">
+                        <div class="main_pitch">
+                            <h1 class="page_title">{% block main %}{% endblock %}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="device">
+                    <nav class="main-nav" id="main-nav">
+                        <div class="logo">
+                            <a href="index" title="Launch Launcher"><img src="static/images/logo.png"
+                                    alt="Launch Launcher" width="100" height="100"></a>
+                        </div>
+                        <ul>
+                            <li><a href="index">Home</a></li>
+                            <li><a href="about">About</a></li>
+                            <li><a href="menu">Order</a></li>
+                            {% if user.is_authenticated %}
+                            <li><a href="setprofile">Hi {{ user.username }}</a></li>
+                            <li><a href="setprofile">logout</a></li>
+                            {% else %}
+                            <li><a href="login">Login</a></li>
+                            <li><a href="register">Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <!-- Header End Here -->
+            {% block content %}
+            {% endblock %}
+            <!-- Footer Section here -->
+            <footer>
+                <div class="main_footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="M_footer">
+                                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 quick_links">
+                                        <div class="title">Quick Links</div>
+                                        <div class="main_cnt">
+                                            <ul>
+                                                <li><a href="about" class="trans" title="About us">About us</a></li>
+                                                <li><a href="faq" class="trans" title="Faq">Faq</a></li>
+                                                <li><a href="contact" class="trans" title="Contacts">Contacts</a></li>
+                                                <li><a href="tc" class="trans" title="Terms and conditions">Terms and
+                                                        conditions</a></li>
+                                                <li><a href="feedback" class="trans" title="Feedback">Feedback</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5 col-md-5 col-sm-6 col-xs-12 location">
+                                        <div class="title">Our Location</div>
+                                        <div class="main_cnt"> <span class="address"><a href="#">234 Main Street, New
+                                                    Delhi, Delhi</a></span> <span class="time1">Mon - Fri: 08:00 am -
+                                                10:00 pm</span> <span class="time2">Sat - Sun: 10:00 am - 11:00
+                                                pm<strong></strong></span> <span class="conact"><a>+91 9876543210</a></span> </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12 subscribe">
+                                        <div class="title">Subscribe Us</div>
+                                        <div class="main_cnt">
+                                            <p class="sbcr_label">Subscribe to the Launch Launcher newsletter to
+                                                <br> get regular update about offers
+                                            </p>
+                                            <form method="post" id="subscribeform" action="thank-you.html">
+                                                <div class="sbcrb_input">
+                                                    <input type="text" name="subscribeemail" class="form-control"
+                                                        placeholder="Enter your email">
+                                                    <button class="subscribebutton send" name="getbutton" type="submit">
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="F_footer">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="payment"> <span>Payment Options</span> <span class="pay_cards"><img
+                                            src="static/images/card_img.png" alt=""></span> </div>
+                                <div class="social">
+                                    <ul>
+                                        <li><a href="#" class="trans" title="Facebook"><i class="fa fa-facebook"
+                                                    aria-hidden="true"></i></a></li>
+                                        <li><a href="#" class="trans" title="Twitter"><i class="fa fa-twitter"
+                                                    aria-hidden="true"></i></a></li>
+                                        <li><a href="#" class="trans" title="Google Plus"><i class="fa fa-google-plus"
+                                                    aria-hidden="true"></i></a></li>
+                                        <li><a href="#" class="trans" title="Instagram"><i class="fa fa-instagram"
+                                                    aria-hidden="true"></i></a></li>
+                                        <li><a href="#" class="trans" title="Pinterest"><i class="fa fa-pinterest-p"
+                                                    aria-hidden="true"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="copyright">
+
+                </div>
+            </footer>
+            <!-- Footer Section here -->
+        </div>
+        <!-- JS Here -->
+        <script src="static/js/custome.js" defer></script>
+        <script src="static/js/jquery.validate.min.js" defer></script>
+        <!-- JS Here -->
+    </body>
+
+</html>

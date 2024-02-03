@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% block title %}Profile{% endblock %}
+{% block main %}Profile{% endblock %}
+{% block content %}
+
+
+<div class="wrapper">
+    <!-- breadcum section -->
+
+    <div class="breadcum">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="main_breadcum">
+                        <ul>
+                            <li><a href="index.html" class="trans" title="Home">Home</a></li>
+                            <li>Profile</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- breadcum section -->
+    <!-- Our login section -->
+    <section id="login">
+        <div class="login_section">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="main_profile">
+                            <form method="post" action="profile" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="login_left col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="login_box">
+                                        <div class="login_form">
+                                            <ul>
+                                                <li>
+                                                    <div class="form-row">
+                                                        <div class="col">
+                                                            <label>First Name</label>
+                                                            <input class="form-control" id="name" name="fname"
+                                                                title="Name" value="{{data.fname}}" required>
+                                                        </div>
+                                                        <div class="col">
+                                                            <label>Last Name</label>
+                                                            <input class="form-control" id="name" name="lname"
+                                                                title="Name" value="{{data.lname}}" required> 
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label>Username</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"
+                                                                id="inputGroupPrepend2">@</span>
+                                                        </div>
+                                                    <input class="form-control" id="username" name="username"
+                                                        title="Username" type="username" value="{{user.username}}" required>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label>Contact Number</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"
+                                                                id="inputGroupPrepend2">+91</span>
+                                                        </div>
+                                                        <input class="form-control" id="phone" name="phone"
+                                                            title="Phone" value="{{data.phone}}" maxlength="10" required>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <label>Email</label>
+                                                    <input class="form-control" name="email" title="Email Address"
+                                                        type="email" value="{{data.email}}" required>
+                                                </li>
+                                                <li>
+                                                    <label>Password</label>
+                                                    <input class="form-control" title="Password" id="Password"
+                                                        name="password" type="password" value="{{user.password}}" required>
+                                                </li>
+                                                <li>
+                                                    <label>Address</label>
+                                                    <textarea class="form-control" name="address"
+                                                        title="Address" required> {{data.address}}</textarea>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="signup_right col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="login_box">
+
+                                        <ul style="padding-left: 90px;">
+                                            <li>
+                                                <img src="{{data.image.url}}" class="bd-placeholder-img rounded-circle"
+                                                    width="200" height="200" alt="...">
+                                                <h5>Change Profile Photo</h5>
+                                                <input type="file" name="image" id="id_cover" class="inputfile">
+                                            </li>
+                                            <li style="padding-left: 30px;">
+                                                <button type="update"
+                                                    class="updatebutton red_btn trans squre-btn hvr-ripple-out"
+                                                    name="update">Update</button>
+                                            </li>
+
+                                        </ul>
+
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    {% endblock %}
